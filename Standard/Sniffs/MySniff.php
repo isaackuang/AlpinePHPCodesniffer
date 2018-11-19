@@ -20,9 +20,6 @@ class VariableSniff extends AbstractVariableSniff
     {
         $tokens  = $phpcsFile->getTokens();
         $varName = ltrim($tokens[$stackPtr]['content'], '$');
-            $error = 'Variable "%s" is not in valid camel caps format';
-            $data  = [$varName];
-            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
 
         // If it's a php reserved var, then its ok.
         if (isset($this->phpReservedVars[$varName]) === true) {
