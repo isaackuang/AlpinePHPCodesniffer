@@ -8,6 +8,8 @@ RUN apk --no-cache --progress add \
     mv phpcs.phar phpcs && mv phpcbf.phar phpcbf && \
     chmod +x php*
 
+ADD Standard /var/www/Standard
+
 WORKDIR /var/www/html
 ENTRYPOINT ["phpcs"]
 CMD ["--help"]
