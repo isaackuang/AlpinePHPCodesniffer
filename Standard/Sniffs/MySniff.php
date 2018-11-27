@@ -25,6 +25,13 @@ class VariableSniff extends AbstractVariableSniff
         if (isset($this->phpReservedVars[$varName]) === true) {
             return;
         }
+
+        if (Common::isCamelCaps($varName, false, true, false) === false) {
+            $error = 'Variable "%s" is not in valid camel caps format';
+            $data  = [$varName];
+            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
+        }
+
     }//end processVariable()
 
 
@@ -58,13 +65,6 @@ class VariableSniff extends AbstractVariableSniff
             $data  = [$errorData[0]];
             $phpcsFile->addError($error, $stackPtr, 'PropertyHasUnderscore', $data);
         }
-
-        if (Common::isCamelCaps($varName, false, true, false) === false) {
-            $error = 'Property "%s" is not in valid camel caps format';
-            $data  = [$varName];
-            $phpcsFile->addError($error, $stackPtr, 'NotCamelCaps', $data);
-        }
-
     }//end processMemberVar()
 
 
